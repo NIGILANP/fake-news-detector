@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live News Detection</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+        }
+
+        .navbar {
+            background: #0d1b2a;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .news-container {
+            width: 80%;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .real {
+            background: #d4edda;
+            color: green;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .fake {
+            background: #f8d7da;
+            color: red;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .confidence {
+            font-size: 13px;
+            color: gray;
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div>📰 Fake News Detector</div>
+    <div>
+        <a href="/">Home</a> |
+        <a href="/dashboard/">Dashboard</a> |
+        <a href="/accounts/logout/">Logout</a>
+    </div>
+</div>
+
+<h1>Live News with AI Detection</h1>
+
+<div class="news-container">
+
+{% for article in articles %}
+
+<div class="card">
+
+    <h3>{{ article.title }}</h3>
+
+    <p>{{ article.description }}</p>
+
+    {% if article.badge == "real" %}
+        <span class="real">✅ Real News</span>
+    {% else %}
+        <span class="fake">❌ Fake News</span>
+    {% endif %}
+
+    <div class="confidence">
+        Confidence: {{ article.confidence }}%
+    </div>
+
+    <a href="{{ article.url }}" target="_blank" class="btn">
+        Read Full Article
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
